@@ -1,6 +1,7 @@
 ARG archlinux_tag=base-devel
 FROM archlinux:$archlinux_tag AS arch
 
+RUN echo "hey"
 RUN pacman -Syu --noconfirm
 
 COPY packages.txt /tmp/packages.txt
@@ -23,7 +24,7 @@ RUN rustup default stable && \
     sudo rm -rf /var/cache/pacman/pkg
 
 USER root
-COPY --chmod=700 wsl2-setup /usr/local/bin/wsl2-setup
+COPY --chmod=755 --chown=root:root /root /
 
 FROM scratch
 
